@@ -27,4 +27,4 @@ jobs:
       run: |
         export PATH=$PATH:~/.local/bin
         # 🌟 'clean' कमांड को हटा दिया गया है ताकि फ़ाइल मिसिंग का एरर न आए
-        buildozer -v android debug
+        buildozer -v android debug   
