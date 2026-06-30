@@ -1,4 +1,4 @@
-name: Build Android APK with Buildozer (Fixed 2026)
+name: Build Android APK with Buildozer (Path Fixed)
 
 on:
   push:
@@ -26,7 +26,5 @@ jobs:
     - name: Build APK with Buildozer
       run: |
         export PATH=$PATH:~/.local/bin
-        buildozer android clean
-        # 🌟 'yes |' को हटाकर सीधे फुल लॉग के साथ बिल्ड शुरू किया
+        # 🌟 'clean' कमांड को हटा दिया गया है ताकि फ़ाइल मिसिंग का एरर न आए
         buildozer -v android debug
-  
