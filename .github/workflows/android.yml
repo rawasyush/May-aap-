@@ -1,4 +1,4 @@
-name: Build Android APK with Buildozer (Latest 2026)
+name: Build Android APK with Buildozer (Fixed 2026)
 
 on:
   push:
@@ -6,32 +6,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4  # 🌟 v3 से v4 पर अपडेटेड
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v5  # 🌟 v4 से v5 पर अपडेटेड
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
     - name: Install System Dependencies
       run: |
         sudo apt update
-        sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev libgdbm-compat-dev
-        pip install --user --upgrade pip setuptools virtualenv cython buildozer
+        sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev tk-dev libgdbm-compat-dev libltdl-dev
+        pip install --user --upgrade pip setuptools virtualenv cython==3.0.10 buildozer
 
     - name: Build APK with Buildozer
       run: |
         export PATH=$PATH:~/.local/bin
-        # क्लाउड एनवायरनमेंट में ऑटो-एक्सेप्ट करने के लिए ताज़ा कमांड
-        yes | buildozer android debug
-
-    - name: Upload APK Artifact
-      uses: actions/upload-artifact@v4  # 🌟 v3 से v4 पर अपडेटेड (यह एरर नहीं देगा)
-      with:
-        name: business-app-apk
-        path: bin/*.apk
+        buildozer android clean
+        # 🌟 'yes |' को हटाकर सीधे फुल लॉग के साथ बिल्ड शुरू किया
+        buildozer -v android debug
   
