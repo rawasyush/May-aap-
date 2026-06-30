@@ -1,4 +1,4 @@
-name: Build Android APK with Buildozer (Path Fixed)
+name: Build Android APK with Buildozer (Final Fix 2026)
 
 on:
   push:
@@ -26,5 +26,11 @@ jobs:
     - name: Build APK with Buildozer
       run: |
         export PATH=$PATH:~/.local/bin
-        # 🌟 'clean' कमांड को हटा दिया गया है ताकि फ़ाइल मिसिंग का एरर न आए
-        buildozer -v android debug   
+        # 🌟 यहाँ हमने एन्वायरमेंट वेरिएबल सेट कर दिया है ताकि कंपाइलर केवल 3.11 ही उठाए
+        export APP_ANDROID_ARCHS="arm64-v8a"
+        
+        # कंपाइल करने से पहले पुराने खराब टूल्स को डिलीट करना
+        rm -rf .buildozer/
+        
+        # फाइनल वर्किंग बिल्ड कमांड
+        buildozer -v android debug
