@@ -11,9 +11,10 @@ requirements = python3, kivy==2.3.0, pyzipper, pycryptodome
 android.permissions = INTERNET, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE
 orientation = portrait
 fullscreen = 1
-
-# 🌟 यह लाइन सबसे महत्वपूर्ण है, इससे लाइसेंस एरर नहीं आएगा
 android.accept_sdk_license = True
+
+# 🌟 यह लाइन p4a के सही पाथ को क्लाउड पर ऑटो-क्रिएट करेगी
+p4a.branch = master
 
 android.archs = arm64-v8a
 android.allow_backup = True
